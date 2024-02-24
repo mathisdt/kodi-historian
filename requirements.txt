@@ -1,0 +1,1 @@
+kodijsonrpc>=1.1
