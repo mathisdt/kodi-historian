@@ -13,8 +13,12 @@ def format_time(time: dict):
 
 
 locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s',
-                    stream=sys.stdout)
+if len(sys.argv) >= 2 and os.path.isdir(os.path.realpath(os.path.dirname(sys.argv[1]))):
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s',
+                        filename=sys.argv[1], filemode='a')
+else:
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s',
+                        stream=sys.stdout)
 logging.getLogger('jsonrpcclient.server').setLevel(logging.WARNING)
 
 configfile = f"{os.path.realpath(os.path.dirname(__file__))}/config.ini"

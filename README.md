@@ -21,7 +21,8 @@ Keep track of your viewing history - without installing extra Kodi plugins.
    Kodi. More information can be found [here](https://kodi.wiki/view/Webserver).
 6. Copy `config-template.ini` to `config.ini` and edit it to contain your data.
    Use the same values you entered in Kodi in the previous step.
-7. Now you can run `main.py`, which will write its output to standard out.
+7. Now you can run `main.py`, which will write its output to standard out if you
+   don't give a filename as target.
 
 ## Infrastructure
 
@@ -29,7 +30,7 @@ For this to be useful, the script should run periodically. This may be achieved 
 e.g. with a line like this in your user's crontab:
 
 ```
-*/5 * * * * /path/to/kodi-historian/venv/bin/python3 /path/to/kodi-historian/main.py >>/writable/path/to/movies.log
+*/5 * * * * /path/to/kodi-historian/venv/bin/python3 /path/to/kodi-historian/main.py /writable/path/to/movies.log
 ```
 
-With either of these, you will have a viewing history in steps of 5 minutes.
+Now you collect a viewing history in steps of 5 minutes.
