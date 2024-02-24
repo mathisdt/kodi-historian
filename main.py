@@ -32,8 +32,9 @@ kodi = kodijsonrpc.KodiJSONClient(config["kodi"]["server"], int(config["kodi"]["
                                   config["kodi"]["user"], config["kodi"]["password"])
 players = kodi.Player.GetActivePlayers()
 for player in players:
-    player_id = player["playerid"]
-    properties = kodi.Player.GetProperties({"playerid": player_id, "properties": ["time", "totaltime", "percentage"]})
-    result = kodi.Player.GetItem({"playerid": player_id, "properties": ["file", "duration", "runtime"]})
-    logging.info(f'playing: {result["item"]["label"]} - {format_time(properties["time"])} of '
+    properties = kodi.Player.GetProperties({"playerid": player["playerid"],
+                                            "properties": ["time", "totaltime", "percentage"]})
+    playing = kodi.Player.GetItem({"playerid": player["playerid"],
+                                   "properties": ["file", "duration", "runtime"]})
+    logging.info(f'playing: {playing["item"]["label"]} - {format_time(properties["time"])} of '
                  f'{format_time(properties["totaltime"])} ({math.floor(properties["percentage"])}%)')
