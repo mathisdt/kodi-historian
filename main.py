@@ -5,7 +5,8 @@ import sys
 import math
 import locale
 import logging
-import kodijsonrpc
+
+from kodiclient import KodiJSONClient
 
 
 def format_time(time: dict):
@@ -28,8 +29,8 @@ if not os.path.isfile(configfile):
 config = configparser.ConfigParser()
 config.read(configfile)
 
-kodi = kodijsonrpc.KodiJSONClient(config["kodi"]["server"], int(config["kodi"]["port"]),
-                                  config["kodi"]["user"], config["kodi"]["password"])
+kodi = KodiJSONClient(config["kodi"]["server"], int(config["kodi"]["port"]),
+                      config["kodi"]["user"], config["kodi"]["password"])
 players = kodi.Player.GetActivePlayers()
 for player in players:
     properties = kodi.Player.GetProperties({"playerid": player["playerid"],
